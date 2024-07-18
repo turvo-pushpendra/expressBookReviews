@@ -7,7 +7,23 @@ const public_users = express.Router();
 
 public_users.post("/register", (req,res) => {
   //Write your code here
-  return res.status(300).json({message: "Yet to be implemented"});
+  try {
+    let { username, password } = req.body;
+    if(!username) {
+      res.status(403).json({message: "Please send username"});
+    }
+
+    if(!password) {
+      res.status(403).json({message: "Please send password"});
+    }
+
+    users.push({ username, password });
+
+    return res.status(200).json({message: "User logged in successfully", data: []});
+  }
+  catch(err) {
+    return res.status(500).json({message: "Internal server error !!"});
+  }
 });
 
 // Get the book list available in the shop
